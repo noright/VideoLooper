@@ -1,0 +1,63 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.RingWorks.videolooper"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+    <!-- android:sharedUserId="android.uid.system" -->
+
+    <uses-sdk
+        android:minSdkVersion="11" 
+        android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        
+        <activity
+            android:name="com.RingWorks.videolooper.Start3"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"
+            android:configChanges="orientation" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name="com.RingWorks.videolooper.Start" 
+            android:screenOrientation="sensorLandscape"
+            android:configChanges="orientation"/>
+        <activity 
+            android:name="com.RingWorks.videolooper.Start2" 
+            android:screenOrientation="sensorLandscape"
+            android:configChanges="orientation"/>
+        <activity
+            android:name="com.RingWorks.videolooper.Player"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape"
+            android:configChanges="orientation" />
+
+        <service android:name="com.RingWorks.videolooper.StorageService" />
+
+        <receiver
+            android:name="com.RingWorks.videolooper.BootUpReceiver"
+            android:enabled="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.example.barcode.Main"></activity>
+        
+    </application>
+
+</manifest>

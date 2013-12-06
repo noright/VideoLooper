@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="app_name">VideoLooper</string>
+    <string name="menu_settings">Settings</string>
+    
+    <string name="loading">Loading…</string>
+    <string name="updatemedia">Media Update…</string>
+    <string name="updatemedia_fail">Content update failed.\n\nPlease re-insert USB flash drive and do not remove until update is completed.</string>
+    <string name="sdcard_not_found">Please insert SD card.</string>
+    <string name="cp_no_sd">Please insert SD card, and then re-insert USB flash drive.</string>
+    <string name="udremove">Copy completed.\n\nPlease remove your USB flash drive.</string>
+    <string name="no_update">　Security check failed. No contents were updated.　</string>
+    <string name="no_media">No playable file.</string>
+    
+    <string name="sd_inserted">SD card is inserted. Start play media files.</string>
+    <string name="ud_inserted">U-Disk is inserted. Start copy media files.</string>
+    <string name="ud_removed">U-Disk is removed. Start play media files.</string>
+    
+    <string name="brightness">Brightness</string>
+    <string name="volume">Volume</string>
+    <string name="image">ImageView</string>
+
+</resources>

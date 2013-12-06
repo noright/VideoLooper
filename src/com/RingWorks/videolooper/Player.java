@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -459,7 +458,6 @@ public class Player extends Activity {
 		}
 	}
 	
-	@SuppressLint("HandlerLeak")
 	class handlerimp extends PlayerHandler{
 		@Override
 		public void playMedia() {

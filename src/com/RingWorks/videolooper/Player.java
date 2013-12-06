@@ -278,9 +278,15 @@ public class Player extends Activity {
 		//video.RegisterClientMessager(p_msg.getBinder());
 		video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 		settings=this.getSharedPreferences("VideoLoop", MODE_PRIVATE);
-		mydialog=new AlertDialog.Builder(this).setTitle("Settings").setPositiveButton("确定", new dialogClick());
-		mydialog.setMultiChoiceItems(new String[] {"开机自启动","退出"}, 
-				new boolean[] {settings.getBoolean("boot", true),false}, 
+		mydialog=new AlertDialog.Builder(this).setTitle("Settings").setPositiveButton("confirm", new dialogClick());
+		boolean boott=true;
+		if(settings==null){
+			//boott=false;
+		}else{
+			boott=settings.getBoolean("boot", true);
+		}
+		mydialog.setMultiChoiceItems(new String[] {"boot up","quit"}, 
+				new boolean[] {boott,false}, 
 				new DialogInterface.OnMultiChoiceClickListener() {			
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				System.out.println("which"+which+"ischeced"+isChecked);
@@ -645,10 +651,14 @@ public class Player extends Activity {
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putBoolean("boot", boot);
 			editor.commit();
-			System.out.println("which"+boot);
+			
+			
 			if(quit){
+				System.out.println("==============="+quit);
 				video.close();
 				ExitApplication.getInstance().exit(Player.this);
+				
+				return;
 			}
 			video.showAll();
 		}		

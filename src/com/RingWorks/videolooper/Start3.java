@@ -44,7 +44,7 @@ public class Start3 extends Activity {
 				}
 			};
 			
-			new Timer().schedule(timerTask, 2000);
+			new Timer().schedule(timerTask, 5000);
 			System.out.println("add timer");
 		}
 	}	

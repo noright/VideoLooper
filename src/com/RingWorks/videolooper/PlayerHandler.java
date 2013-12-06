@@ -117,7 +117,6 @@ public abstract class PlayerHandler extends Handler {
 		case MsgPlayerStatus.PLAYER_START:
 			writeFile(GlobalString.Fb0Blank, "1");
 			if(first){
-				System.out.println("yeyeyeyeyeyeyfirfirfir");
 				writeFile(GlobalString.Fb1Blank, "1");
 				first=false;
 			}

@@ -14,7 +14,7 @@ import android.util.Log;
 public abstract class PlayerHandler extends Handler {
 
 	WeakReference<Activity> mActivity;
-	
+	boolean first=true;
 	public PlayerHandler(){
 		
 	}
@@ -116,7 +116,12 @@ public abstract class PlayerHandler extends Handler {
 			break;
 		case MsgPlayerStatus.PLAYER_START:
 			writeFile(GlobalString.Fb0Blank, "1");
-			writeFile(GlobalString.Fb1Blank, "1");
+			if(first){
+				System.out.println("yeyeyeyeyeyeyfirfirfir");
+				writeFile(GlobalString.Fb1Blank, "1");
+				first=false;
+			}
+			
 			writeFile(GlobalString.Videoaxis, "0 0 0 0");
 			System.out.println("aaa9");
 			break;

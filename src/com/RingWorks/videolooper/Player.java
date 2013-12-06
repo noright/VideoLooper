@@ -274,6 +274,9 @@ public class Player extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		video.Init();					
+		//video.RegisterClientMessager(p_msg.getBinder());
+		video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 		settings=this.getSharedPreferences("VideoLoop", MODE_PRIVATE);
 		mydialog=new AlertDialog.Builder(this).setTitle("Settings").setPositiveButton("确定", new dialogClick());
 		mydialog.setMultiChoiceItems(new String[] {"开机自启动","退出"}, 
@@ -479,9 +482,9 @@ public class Player extends Activity {
 				switch (mediaType) {
 				case MEDIA_TYPE_VIDEO:
 					isPlayVideo = true;					
-					video.Init();					
-					//video.RegisterClientMessager(p_msg.getBinder());
-					video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
+//					video.Init();					
+//					//video.RegisterClientMessager(p_msg.getBinder());
+//					video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 					video.Open(contentPath + filename);
 					video.Play();				
 					break;

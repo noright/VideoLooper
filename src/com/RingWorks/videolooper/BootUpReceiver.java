@@ -12,7 +12,7 @@ public class BootUpReceiver extends BroadcastReceiver {
 		settings=context.getSharedPreferences("VideoLoop", Context.MODE_PRIVATE);
 		System.out.println("cpucpu"+settings.getBoolean("boot", true));
 		if(settings==null||settings.getBoolean("boot", true)){
-			Intent i = new Intent(context, Start3.class);
+			Intent i = new Intent(context, Start.class);
 			i.putExtra("DelayStart", true);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);

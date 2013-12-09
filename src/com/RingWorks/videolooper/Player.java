@@ -278,14 +278,14 @@ public class Player extends Activity {
 		//video.RegisterClientMessager(p_msg.getBinder());
 		video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 		settings=this.getSharedPreferences("VideoLoop", MODE_PRIVATE);
-		mydialog=new AlertDialog.Builder(this).setTitle("Settings").setPositiveButton("confirm", new dialogClick());
+		mydialog=new AlertDialog.Builder(this).setTitle("Settings").setPositiveButton("Confirm", new dialogClick());
 		boolean boott=true;
 		if(settings==null){
-			//boott=false;
+			
 		}else{
 			boott=settings.getBoolean("boot", true);
 		}
-		mydialog.setMultiChoiceItems(new String[] {"boot up","quit"}, 
+		mydialog.setMultiChoiceItems(new String[] {"Self start","Quit"}, 
 				new boolean[] {boott,false}, 
 				new DialogInterface.OnMultiChoiceClickListener() {			
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -481,16 +481,12 @@ public class Player extends Activity {
 					nullFile = 0;
 				}
 			}
-
 			if (nullFile < playList.size()) {
 				
 				int mediaType = getMediaType(filename);
 				switch (mediaType) {
 				case MEDIA_TYPE_VIDEO:
 					isPlayVideo = true;					
-//					video.Init();					
-//					//video.RegisterClientMessager(p_msg.getBinder());
-//					video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 					video.Open(contentPath + filename);
 					video.Play();				
 					break;
@@ -544,9 +540,6 @@ public class Player extends Activity {
 			switch (mediaType) {
 			case MEDIA_TYPE_VIDEO:
 				isPlayVideo = true;					
-				video.Init();					
-				//video.RegisterClientMessager(p_msg.getBinder());
-				video.RegisterClientMessager(new Messenger(new handlerimp()).getBinder());
 				video.Open(contentPath + filename);
 				video.Play();				
 				break;
@@ -557,8 +550,7 @@ public class Player extends Activity {
 					nullFile++;
 					playMedia();
 				} else {
-					mImageView.setVisibility(View.VISIBLE);
-					
+					mImageView.setVisibility(View.VISIBLE);				
 					mImageView.setImageBitmap(bm);
 					
 					ti = new Timer();
@@ -646,46 +638,50 @@ public class Player extends Activity {
 	}
 	class dialogClick implements OnClickListener{
 		@Override
-		public void onClick(DialogInterface dialog, int which) {			
-			System.out.println("oooooooooo");			
+		public void onClick(DialogInterface dialog, int which) {
+			video.CloseAll();
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putBoolean("boot", boot);
 			editor.commit();
 			
-			
 			if(quit){
-				System.out.println("==============="+quit);
 				video.close();
 				ExitApplication.getInstance().exit(Player.this);
 				
 				return;
 			}
 			video.showAll();
+			try {
+				watchdogjni.enableWD();
+			} catch (NoWatchDogJni e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}		
 	}
 	
 	SharedPreferences settings;
-	
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			
 			if (event.getX()<= 50 && event.getY() <= 50) {
+				 
 				timer = new Timer();
 				timer.schedule(new TimerTask() {
+					
 					@Override
-					public void run() {
-						Log.i(TAG, "Long-press catched, apk will shutdown.");						
+					public void run() {					
 						try {
-							watchdogjni.disableWD();
+							watchdogjni.disableWD();						
 						} catch (NoWatchDogJni e) {
 							System.out.println("weidakai");
 						}
-						video.CloseAll();	
+						video.CloseAll();
 					}
-				}, LONG_PRESS_TIME);				
-				mydialog.show();
+				}, LONG_PRESS_TIME);
+					mydialog.show();
 			}
 			break;
 			
@@ -699,7 +695,7 @@ public class Player extends Activity {
 			
 		case MotionEvent.ACTION_MOVE:
 
-			if (timer != null && (event.getX() > 50 || event.getY() > 50)) {
+			if (timer != null && (event.getX() > 150 || event.getY() >150)) {
 				timer.cancel();
 			}
 			break;
